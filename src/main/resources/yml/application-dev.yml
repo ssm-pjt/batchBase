@@ -1,0 +1,13 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://138.2.116.122:3306/portfolio?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul
+    username: portfolio
+    password: moon0942!
+  jpa:
+    hibernate:
+      ddl-auto: none
