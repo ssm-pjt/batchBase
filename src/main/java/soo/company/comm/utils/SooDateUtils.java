@@ -1,5 +1,6 @@
 package soo.company.comm.utils;
 
-public class ScDateUtils {
+public class SooDateUtils {
 }
+
 

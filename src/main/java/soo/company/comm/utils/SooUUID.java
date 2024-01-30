@@ -57,7 +57,7 @@ import java.security.SecureRandom;
  * @since 1.5
  */
 @SuppressWarnings("serial")
-public class ScUUID implements Serializable {
+public class SooUUID implements Serializable {
     /*
      * The most significant 64 bits of this UUID.
      *
@@ -113,7 +113,7 @@ public class ScUUID implements Serializable {
     /*
      * Private constructor which uses a byte array to construct the new UUID.
      */
-    private ScUUID(byte[] data) {
+    private SooUUID(byte[] data) {
         long msb = 0;
         long lsb = 0;
         for (int i = 0; i < 8; i++)
@@ -133,7 +133,7 @@ public class ScUUID implements Serializable {
      * @param mostSigBits
      * @param leastSigBits
      */
-    public ScUUID(long mostSigBits, long leastSigBits) {
+    public SooUUID(long mostSigBits, long leastSigBits) {
         this.mostSigBits = mostSigBits;
         this.leastSigBits = leastSigBits;
     }
@@ -146,7 +146,7 @@ public class ScUUID implements Serializable {
      *
      * @return a randomly generated <tt>UUID</tt>.
      */
-    public static ScUUID randomUUID() {
+    public static SooUUID randomUUID() {
         SecureRandom ng = numberGenerator;
         if (ng == null) {
             numberGenerator = ng = new SecureRandom();
@@ -159,7 +159,7 @@ public class ScUUID implements Serializable {
         randomBytes[8] &= 0x3f; /* clear variant */
         randomBytes[8] |= 0x80; /* set to IETF variant */
 
-        return new ScUUID(randomBytes);
+        return new SooUUID(randomBytes);
     }
 
     /**
@@ -169,7 +169,7 @@ public class ScUUID implements Serializable {
      * @param name a byte array to be used to construct a <tt>UUID</tt>.
      * @return a <tt>UUID</tt> generated from the specified array.
      */
-    public static ScUUID nameUUIDFromBytes(byte[] name) {
+    public static SooUUID nameUUIDFromBytes(byte[] name) {
         MessageDigest md;
         try {
             // 2011.10.10 보안점검 후속조치 암호화 알고리즘 변경(MD5 -> SHA-256)
@@ -203,7 +203,7 @@ public class ScUUID implements Serializable {
         md5Bytes[8] &= 0x3f; /* clear variant */
         md5Bytes[8] |= 0x80; /* set to IETF variant */
 
-        return new ScUUID(md5Bytes);
+        return new SooUUID(md5Bytes);
     }
 
     /**
@@ -215,7 +215,7 @@ public class ScUUID implements Serializable {
      * @throws IllegalArgumentException if name does not conform to the string representation as
      *                                  described in {@link #toString}.
      */
-    public static ScUUID fromString(String name) {
+    public static SooUUID fromString(String name) {
         String[] components = name.split("-");
         if (components.length != 5)
             throw new IllegalArgumentException("Invalid UUID string: " + name);
@@ -232,7 +232,7 @@ public class ScUUID implements Serializable {
         leastSigBits <<= 48;
         leastSigBits |= Long.decode(components[4]).longValue();
 
-        return new ScUUID(mostSigBits, leastSigBits);
+        return new SooUUID(mostSigBits, leastSigBits);
     }
 
     // Field Accessor Methods
@@ -462,9 +462,9 @@ public class ScUUID implements Serializable {
         if (obj == null)
             return false;
         // 보안 취약점 점검 지적사항 반영 시작 끝
-        if (!(obj instanceof ScUUID id))
+        if (!(obj instanceof SooUUID id))
             return false;
-        if (((ScUUID) obj).variant() != this.variant())
+        if (((SooUUID) obj).variant() != this.variant())
             return false;
         return (mostSigBits == id.mostSigBits && leastSigBits == id.leastSigBits);
     }
@@ -483,7 +483,7 @@ public class ScUUID implements Serializable {
      * @return -1, 0 or 1 as this <tt>UUID</tt> is less than, equal to, or
      * greater than <tt>val</tt>.
      */
-    public int compareTo(ScUUID val) {
+    public int compareTo(SooUUID val) {
         // The ordering is intentionally set up so that the UUIDs
         // can simply be numerically compared as two numbers
         return (this.mostSigBits < val.mostSigBits ? -1
