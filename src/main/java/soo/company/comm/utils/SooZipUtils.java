@@ -48,7 +48,7 @@ public class SooZipUtils {
         byte[] buf = new byte[1024 * 8];
 
         zis = new ZipArchiveInputStream(is, charsetName, false);
-        while ((entry = zis.getNextZipEntry()) != null) {
+        while (null != (entry = zis.getNextZipEntry())) {
             name = entry.getName();
             target = new File(destDir, name);
             if (entry.isDirectory()) {
